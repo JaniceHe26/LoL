@@ -29,6 +29,10 @@ const select = document.querySelector("#class-select");
 const onChampionSelect = event => {
   //This returns me their name; => "Anivia"
   return event.target.selectedOptions[0].value;
+    //returns the champ name
+    // let grabChampion = this.champions.filter(champion => this.champions[champion] === championName);
+    // this.displayChamp(grabChampion);
+    //Grabbing champion data from champions object using name as the key.
 }
 
 select.onchange = onChampionSelect;
@@ -63,6 +67,25 @@ const displayChamp = (champions) => {
       champ.appendChild(champName);
     }
   }
+
+    // const name = document.createElement("h2");
+    // name.className = "champion-name";
+    // name.innerHTML = champion.name;
+    // this.champContainer.appendChild(name);
+
+    // const title = document.createElement("h4");
+    // title.className = "champion-title";
+    // title.innerHTML = champion.title;
+
+    // const image = document.createElement("img");
+    // image.className = "champion-image";
+    // image.src = champion.image.sprite;
+    // this.champContainer.appendChild(image);
+
+    // const description = document.createElement("p");
+    // description.className = "champion-about";
+    // description.innerHTML = champion.blurb;
+    // this.champContainer.appendChild(description);
 }
 
 

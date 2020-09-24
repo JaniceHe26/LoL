@@ -39,13 +39,16 @@ class App {
   // onChampionSelect = event => {} 
   onChampionSelect(event) {
     if (!event) return; 
-    //returns the champ name
-    // let grabChampion = this.champions.filter(champion => this.champions[champion] === championName);
-    // this.displayChamp(grabChampion);
-    //Grabbing champion data from champions object using name as the key.
     this.clearChampionData();
     const championName = event.target.selectedOptions[0].value;
     this.displayChamp(this.champions[championName.replace(/\s/g, '')]);
+  }
+
+  appendChampionDataToChampContainer(elementType, className, content) {
+    const element = document.createElement(elementType);
+    element.className = className;
+    element.innerHTML = content;
+    this.champContainer.appendChild(element);
   }
 
   /**
@@ -53,9 +56,9 @@ class App {
    * @param {Object} champion 
    */
   displayChamp(champion) {
-    const name = document.createElement("h2");
-    name.innerHTML = champion.name;
-    this.champContainer.appendChild(name);
+    this.appendChampionDataToChampContainer("h2", "champion-name", champion.name);
+    this.appendChampionDataToChampContainer("h4", "champion-title", champion.title);
+    this.appendChampionDataToChampContainer("p", "champion-about", champion.blurb);
   }
 
   clearChampionData() {
