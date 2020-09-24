@@ -7,7 +7,7 @@ async function getChamp () {
     const response = await axios.get(url);
     //Stored locally in this function
     champions = response.data.data;
-    console.log(champions);
+    //console.log(champions);
     generateDropdown();
     // displayChamp(response.data.data);
     // champValues(response.data.data);
@@ -24,9 +24,20 @@ const champ = document.querySelector(".champ-container");
 //   let dropDown = document.querySelector(".option-value");
 //   return dropDown.value;
 // }
+const select = document.querySelector("#class-select");
 
+const onChampionSelect = event => {
+  //This returns me their name; => "Anivia"
+  return event.target.selectedOptions[0].value;
+}
+
+select.onchange = onChampionSelect;
+
+
+/**
+ * Generate Drop down with champion's name. 
+ */
 const generateDropdown = () => {
-  const select = document.querySelector("#class-select");
   //give me keys
   for (const champion in champions) {
     const option = document.createElement("option");
@@ -43,7 +54,7 @@ const displayChamp = (champions) => {
   //let value = queryselector for the dropDown.
   for (const champion in champions) {
     //Aatrox is the key
-    console.log(champions[champion].name);
+    //console.log(champions[champion].name);
     //"Fighter would replace option.value of the selected"
     //Replace "Fighter" with value.value
     if (filterChamp(champions[champion], "Fighter")) {
@@ -62,9 +73,8 @@ const filterChamp = (champ, type) => {
 
 //Sort By Tag Functions
 
-//.map function
-
-
+  
+  // .map function
   // champions.forEach(champion => {
   //   const champName = document.createElement("h2");
   //   champName.innerHTML = champion.name;
