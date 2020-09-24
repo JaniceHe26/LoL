@@ -2,6 +2,7 @@ class App {
   constructor() {
     this.champions;
     this.selectEl = document.querySelector("#class-select");
+    this.champContainer = document.querySelector(".champ-container");
     this.initialize();
   }
   
@@ -10,11 +11,7 @@ class App {
     console.log(this.champions);
     this.generateDropdown();
     this.selectEl.addEventListener('change', event => this.onChampionSelect(event));
-    // this.onChampionSelect();
   }
-
-
-
 
   async getChampionData() {
     const url = "http://ddragon.leagueoflegends.com/cdn/10.19.1/data/en_US/champion.json"
@@ -43,11 +40,12 @@ class App {
   onChampionSelect(event) {
     if (!event) return; 
     //returns the champ name
-    const championName = event.target.selectedOptions[0].value;
     // let grabChampion = this.champions.filter(champion => this.champions[champion] === championName);
     // this.displayChamp(grabChampion);
     //Grabbing champion data from champions object using name as the key.
-    this.displayChamp(this.champions[championName]);
+    this.clearChampionData();
+    const championName = event.target.selectedOptions[0].value;
+    this.displayChamp(this.champions[championName.replace(/\s/g, '')]);
   }
 
   /**
@@ -55,14 +53,15 @@ class App {
    * @param {Object} champion 
    */
   displayChamp(champion) {
-    const champContainer = document.querySelector(".champ-container");
     const name = document.createElement("h2");
     name.innerHTML = champion.name;
-    champContainer.appendChild(name);
+    this.champContainer.appendChild(name);
   }
 
   clearChampionData() {
-    // while ()
+    while (this.champContainer.lastChild) {
+      this.champContainer.removeChild(this.champContainer.lastChild);
+    }
   }
 }
 
